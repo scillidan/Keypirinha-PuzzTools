@@ -40,14 +40,16 @@ _SORTS = {
 }
 
 _TOOLS = {
-    '2winurl': lambda x: x.replace('/', '\\'),
-    # '2winurl2': lambda x: x.replace('/', '\\\\'),
-    '2unixurl': lambda x: x.replace('\\', '/'),
-    '2raw': lambda x: re.sub(r'https://github.com/([^/]+)/([^/]+)/blob/([^/]+)/(.+)', r'https://raw.githubusercontent.com/\1/\2/refs/heads\3/\4', x),
-    '2gh': lambda x: re.sub(r'https://github.com/([^/]+)/([^/]+)(?:/.*)?', r'\1/\2', x),
     '2atomc': lambda x: re.sub(r'https://github.com/([^/]+)/([^/]+)(?:/.*)?', r'https://github.com/\1/\2/commits.atom', x),
     '2atomr': lambda x: re.sub(r'https://github.com/([^/]+)/([^/]+)(?:/.*)?', r'https://github.com/\1/\2/releases.atom', x),
-    'list2line': lambda x: ','.join(sorted(set(x.split()), key=int))
+    '2gh': lambda x: re.sub(r'https://github.com/([^/]+)/([^/]+)(?:/.*)?', r'\1/\2', x),
+    '2raw': lambda x: re.sub(r'https://github.com/([^/]+)/([^/]+)/blob/([^/]+)/(.+)', r'https://raw.githubusercontent.com/\1/\2/refs/heads\3/\4', x),
+    '2unixurl': lambda x: x.replace('\\', '/'),
+    '22winurl': lambda x: x.replace('\\\\', '/'),
+    '2winurl': lambda x: x.replace('/', '\\'),
+    '2winurl2': lambda x: x.replace('\\', '\\\\'),
+    'linebreak2comma': lambda x: ','.join(sorted(set(x.split()), key=int)),
+    'lobechatassistants': lambda x: re.sub(r'https://lobehub.com/assistants/(.*)', r'https://lobechat.com/discover/assistant/\1', x),
 }
 
 TRANSFORMS = {
