@@ -40,16 +40,17 @@ _SORTS = {
 }
 
 _TOOLS = {
-    '2atomc': lambda x: re.sub(r'https://github.com/([^/]+)/([^/]+)(?:/.*)?', r'https://github.com/\1/\2/commits.atom', x),
-    '2atomr': lambda x: re.sub(r'https://github.com/([^/]+)/([^/]+)(?:/.*)?', r'https://github.com/\1/\2/releases.atom', x),
-    '2gh': lambda x: re.sub(r'https://github.com/([^/]+)/([^/]+)(?:/.*)?', r'\1/\2', x),
-    '2raw': lambda x: re.sub(r'https://github.com/([^/]+)/([^/]+)/blob/([^/]+)/(.+)', r'https://raw.githubusercontent.com/\1/\2/refs/heads/\3/\4', x),
-    '2unixurl': lambda x: x.replace('\\', '/'),
-    '22winurl': lambda x: x.replace('\\\\', '/'),
-    '2winurl': lambda x: x.replace('/', '\\'),
-    '2winurl2': lambda x: x.replace('\\', '\\\\'),
-    'linebreak2comma': lambda x: ','.join(sorted(set(x.split()), key=int)),
-    'lobechatassistants': lambda x: re.sub(r'https://lobehub.com/assistants/(.*)', r'https://lobechat.com/discover/assistant/\1', x),
+    '2github commits atom': lambda x: re.sub(r'https://github.com/([^/]+)/([^/]+)(?:/.*)?', r'https://github.com/\1/\2/commits.atom', x),
+    '2github releases atom': lambda x: re.sub(r'https://github.com/([^/]+)/([^/]+)(?:/.*)?', r'https://github.com/\1/\2/releases.atom', x),
+    '2github raw url': lambda x: re.sub(r'https://github.com/([^/]+)/([^/]+)/blob/([^/]+)/(.+)', r'https://raw.githubusercontent.com/\1/\2/refs/heads/\3/\4', x),
+    '2ghcli url': lambda x: re.sub(r'https://github.com/([^/]+)/([^/]+)(?:/.*)?', r'\1/\2', x),
+    '2unix url': lambda x: x.replace('\\', '/'),
+    '22unix url': lambda x: x.replace('\\\\', '/'),
+    '2windows url': lambda x: x.replace('/', '\\'),
+    '2windows url2': lambda x: x.replace('\\', '\\\\'),
+    'lobechat assistants': lambda x: re.sub(r'https://lobehub.com/assistants/(.*)', r'https://lobechat.com/discover/assistant/\1', x),
+    'linebreak 2comma': lambda x: ','.join(sorted(set(x.split()), key=int)),
+    'markdown link': lambda x: '[{}]({})'.format(*[line.strip() for line in x.splitlines()]),
 }
 
 TRANSFORMS = {
