@@ -1,0 +1,38 @@
+name: Create Releases
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install p7zip-full
+
+    - name: Compress Repository
+      run: |
+        7z a -r PuzzTools.zip . -x!.git -x!.github
+        mv PuzzTools.zip PuzzTools.keypirinha-package
+
+    - name: Generate SHA256 checksums
+      run: sha256sum PuzzTools.keypirinha-package > PuzzTools.keypirinha-package.sha256
+
+    - name: Create GitHub Release and upload files
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: ${{ github.ref_name }}
+        name: "${{ github.ref_name }}"
+        files: |
+          PuzzTools.keypirinha-package
