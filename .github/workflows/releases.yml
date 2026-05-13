@@ -3,8 +3,13 @@ name: Create Releases
 on:
   push:
     tags:
-      - 'v*'
+      - "*"
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (e.g., v1.0.0)'
+        required: true
+        type: string
 
 jobs:
   release:
@@ -14,25 +19,23 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
-    - name: Install system dependencies
+    - name: Install p7zip
       run: |
         sudo apt-get update
-        sudo apt-get install p7zip-full
+        sudo apt-get install -y p7zip-full
 
-    - name: Compress Repository
-      run: |
-        7z a -r PuzzTools.zip . -x!.git -x!.github
-        mv PuzzTools.zip PuzzTools.keypirinha-package
+    - name: Build package
+      run: make
 
     - name: Generate SHA256 checksums
-      run: sha256sum PuzzTools.keypirinha-package > PuzzTools.keypirinha-package.sha256
+      run: sha256sum dist/PuzzTools.keypirinha-package > dist/PuzzTools.keypirinha-package.sha256
 
-    - name: Create GitHub Release and upload files
+    - name: Release
       uses: softprops/action-gh-release@v2
       with:
-        tag_name: ${{ github.ref_name }}
-        name: "${{ github.ref_name }}"
+        tag_name: ${{ github.event_name == 'workflow_dispatch' && inputs.version || github.ref_name }}
+        name: ${{ github.event_name == 'workflow_dispatch' && inputs.version || github.ref_name }}
         files: |
-          PuzzTools.keypirinha-package
+          dist/PuzzTools.keypirinha-package
