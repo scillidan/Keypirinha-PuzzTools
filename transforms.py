@@ -39,7 +39,6 @@ _SORTS = {
 }
 
 _TOOLS = {
-    # 'lobechat assistants': lambda x: re.sub(r'https://lobehub.com/assistants/(.*)', r'https://lobechat.com/discover/assistant/\1', x),
     '2github api': lambda x: x.replace('https://github.com/', 'https://api.github.com/repos/'),
     '2github commits atom': lambda x: re.sub(r'https://github.com/([^/]+)/([^/]+)(?:/.*)?', r'https://github.com/\1/\2/commits.atom', x),
     '2github raw url': lambda x: re.sub(r'https://github.com/([^/]+)/([^/]+)/blob/([^/]+)/(.+)', r'https://raw.githubusercontent.com/\1/\2/refs/heads/\3/\4', x),
