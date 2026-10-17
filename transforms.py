@@ -49,10 +49,11 @@ _TOOLS = {
     '2windows url': lambda x: x.replace('/', '\\'),
     '2windows urlx2': lambda x: x.replace('\\', '\\\\'),
     'typst commit': lambda x: re.sub(r'packages/preview/(.+?)/.*', r'https://typst.app/universe/search/?q=\1', x),
-    'vscode marketplace': lambda x: re.sub(r'https://marketplace.visualstudio.com/items\?itemName=([^\.]+)\.(.+)', r'https://marketplace.visualstudio.com/_apis/public/gallery/publishers/\1/vsextensions/\2/latest/vspackage', x),
     'delete space': lambda x: re.sub(r'[\s\xA0]+', '', x),
+    'delete after ?': lambda x: x.split('?')[0],
     'linebreak 2comma': lambda x: ','.join(sorted(set(x.split()), key=int)),
     'scoop shim 2dir': lambda x: x.replace('\\shims\\', '\\apps\\').replace('.exe', '\\current\\' + x.split('\\')[-1])
+    # 'vscode marketplace': lambda x: re.sub(r'https://marketplace.visualstudio.com/items\?itemName=([^\.]+)\.(.+)', r'https://marketplace.visualstudio.com/_apis/public/gallery/publishers/\1/vsextensions/\2/latest/vspackage', x)
 }
 
 TRANSFORMS = {
