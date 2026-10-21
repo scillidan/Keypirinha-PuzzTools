@@ -51,7 +51,7 @@ _TOOLS = {
     'typst commit': lambda x: re.sub(r'packages/preview/(.+?)/.*', r'https://typst.app/universe/search/?q=\1', x),
     'delete space': lambda x: re.sub(r'[\s\xA0]+', '', x),
     'delete after ?': lambda x: x.split('?')[0],
-    'linebreak 2comma': lambda x: ','.join(sorted(set(x.split()), key=int)),
+    'linebreak 2comma': lambda x: ', '.join(x.splitlines()).lower(),
     'scoop shim 2dir': lambda x: x.replace('\\shims\\', '\\apps\\').replace('.exe', '\\current\\' + x.split('\\')[-1])
     # 'vscode marketplace': lambda x: re.sub(r'https://marketplace.visualstudio.com/items\?itemName=([^\.]+)\.(.+)', r'https://marketplace.visualstudio.com/_apis/public/gallery/publishers/\1/vsextensions/\2/latest/vspackage', x)
 }
