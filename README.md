@@ -1,3 +1,6 @@
+> This repository is archived and kept for historical reference only.  
+> I'm currently using [puzz_sort.sh](https://github.com/scillidan/scripts/blob/main/puzz_sort.sh), [puzz_transform.sh](https://github.com/scillidan/scripts/blob/main/puzz_transform.sh) instead.
+
 # Keypirinha Plugin: PuzzTools
 
 This is Keypirinha-PuzzTools, a plugin for the [Keypirinha](http://keypirinha.com) launcher.
